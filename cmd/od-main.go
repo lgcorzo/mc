@@ -23,11 +23,11 @@ import (
 	"strings"
 	"time"
 
-	json "github.com/minio/colorjson"
+	json "github.com/lgcorzo/colorjson"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/minio/cli"
-	"github.com/minio/mc/pkg/probe"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/mc/pkg/probe"
 )
 
 // make a bucket.

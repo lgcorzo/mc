@@ -20,7 +20,7 @@ package cmd
 import (
 	"testing"
 
-	"github.com/minio/cli"
+	"github.com/lgcorzo/cli"
 )
 
 func TestCLIOnUsageError(t *testing.T) {

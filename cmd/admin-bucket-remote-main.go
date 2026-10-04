@@ -17,7 +17,7 @@
 
 package cmd
 
-import "github.com/minio/cli"
+import "github.com/lgcorzo/cli"
 
 var adminBucketRemoteSubcommands = []cli.Command{
 	adminBucketRemoteAddCmd,

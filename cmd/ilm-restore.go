@@ -23,9 +23,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/minio/cli"
-	json "github.com/minio/colorjson"
-	"github.com/minio/mc/pkg/probe"
+	"github.com/lgcorzo/cli"
+	json "github.com/lgcorzo/colorjson"
+	"github.com/lgcorzo/mc/pkg/probe"
 )
 
 // ilm restore specific flags.

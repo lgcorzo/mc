@@ -25,11 +25,11 @@ import (
 	"syscall"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/cli"
-	json "github.com/minio/colorjson"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/cli"
+	json "github.com/lgcorzo/colorjson"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/minio-go/v7"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 func defaultPartSize() string {

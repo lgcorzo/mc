@@ -25,9 +25,9 @@ import (
 	"strings"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/cli"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/minio-go/v7/pkg/lifecycle"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/minio-go/v7/pkg/lifecycle"
 	"github.com/rs/xid"
 )
 

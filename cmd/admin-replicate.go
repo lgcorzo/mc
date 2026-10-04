@@ -17,7 +17,7 @@
 
 package cmd
 
-import "github.com/minio/cli"
+import "github.com/lgcorzo/cli"
 
 var adminReplicateSubcommands = []cli.Command{
 	adminReplicateAddCmd,

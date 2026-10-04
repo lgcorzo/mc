@@ -18,8 +18,8 @@
 package cmd
 
 import (
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/minio-go/v7"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/minio-go/v7"
 )
 
 // URLs contains source and target urls

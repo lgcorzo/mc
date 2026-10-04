@@ -22,9 +22,9 @@ import (
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/minio/cli"
-	"github.com/minio/madmin-go/v3"
-	"github.com/minio/mc/pkg/probe"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/madmin-go/v3"
+	"github.com/lgcorzo/mc/pkg/probe"
 )
 
 var supportTopDriveFlags = []cli.Flag{

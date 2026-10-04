@@ -18,8 +18,8 @@
 package cmd
 
 import (
-	"github.com/minio/cli"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 var supportProxyShowCmd = cli.Command{

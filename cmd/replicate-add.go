@@ -28,13 +28,13 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/fatih/color"
-	"github.com/minio/cli"
-	json "github.com/minio/colorjson"
-	"github.com/minio/madmin-go/v3"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/minio-go/v7/pkg/replication"
-	"github.com/minio/minio-go/v7/pkg/s3utils"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/cli"
+	json "github.com/lgcorzo/colorjson"
+	"github.com/lgcorzo/madmin-go/v3"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/minio-go/v7/pkg/replication"
+	"github.com/lgcorzo/minio-go/v7/pkg/s3utils"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 var replicateAddFlags = []cli.Flag{

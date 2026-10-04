@@ -38,17 +38,17 @@ import (
 	"github.com/pkg/xattr"
 	"github.com/rjeczalik/notify"
 
-	xfilepath "github.com/minio/filepath"
-	"github.com/minio/mc/pkg/disk"
-	"github.com/minio/mc/pkg/hookreader"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/cors"
-	"github.com/minio/minio-go/v7/pkg/encrypt"
-	"github.com/minio/minio-go/v7/pkg/lifecycle"
-	"github.com/minio/minio-go/v7/pkg/notification"
-	"github.com/minio/minio-go/v7/pkg/replication"
-	"github.com/minio/pkg/v3/console"
+	xfilepath "github.com/lgcorzo/filepath"
+	"github.com/lgcorzo/mc/pkg/disk"
+	"github.com/lgcorzo/mc/pkg/hookreader"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/minio-go/v7"
+	"github.com/lgcorzo/minio-go/v7/pkg/cors"
+	"github.com/lgcorzo/minio-go/v7/pkg/encrypt"
+	"github.com/lgcorzo/minio-go/v7/pkg/lifecycle"
+	"github.com/lgcorzo/minio-go/v7/pkg/notification"
+	"github.com/lgcorzo/minio-go/v7/pkg/replication"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 // filesystem client

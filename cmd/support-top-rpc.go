@@ -32,10 +32,10 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/klauspost/compress/zstd"
-	"github.com/minio/cli"
-	json "github.com/minio/colorjson"
-	"github.com/minio/madmin-go/v3"
-	"github.com/minio/mc/pkg/probe"
+	"github.com/lgcorzo/cli"
+	json "github.com/lgcorzo/colorjson"
+	"github.com/lgcorzo/madmin-go/v3"
+	"github.com/lgcorzo/mc/pkg/probe"
 	"github.com/olekukonko/tablewriter"
 )
 

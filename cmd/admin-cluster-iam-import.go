@@ -26,11 +26,11 @@ import (
 	"strings"
 
 	"github.com/klauspost/compress/zip"
-	"github.com/minio/cli"
-	json "github.com/minio/colorjson"
-	"github.com/minio/madmin-go/v3"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/cli"
+	json "github.com/lgcorzo/colorjson"
+	"github.com/lgcorzo/madmin-go/v3"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 var adminClusterIAMImportCmd = cli.Command{

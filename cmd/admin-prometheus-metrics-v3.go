@@ -24,8 +24,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/minio/cli"
-	"github.com/minio/minio-go/v7/pkg/set"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/minio-go/v7/pkg/set"
 )
 
 var (

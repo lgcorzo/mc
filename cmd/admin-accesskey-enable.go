@@ -18,7 +18,7 @@
 package cmd
 
 import (
-	"github.com/minio/cli"
+	"github.com/lgcorzo/cli"
 )
 
 var adminAccesskeyEnableCmd = cli.Command{

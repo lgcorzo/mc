@@ -34,12 +34,12 @@ import (
 	"time"
 
 	"github.com/mattn/go-ieproxy"
-	"github.com/minio/madmin-go/v3"
-	"github.com/minio/minio-go/v7"
+	"github.com/lgcorzo/madmin-go/v3"
+	"github.com/lgcorzo/minio-go/v7"
 
 	jwtgo "github.com/golang-jwt/jwt/v4"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 func isErrIgnored(err *probe.Error) (ignored bool) {

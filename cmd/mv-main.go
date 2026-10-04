@@ -23,9 +23,9 @@ import (
 	"sync"
 
 	"github.com/fatih/color"
-	"github.com/minio/cli"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 // mv command flags.

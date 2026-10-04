@@ -24,8 +24,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/cli"
-	"github.com/minio/mc/pkg/probe"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/mc/pkg/probe"
 )
 
 var shareUploadFlags = []cli.Flag{

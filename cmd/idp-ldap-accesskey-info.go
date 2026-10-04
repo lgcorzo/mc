@@ -21,7 +21,7 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/minio/cli"
+	"github.com/lgcorzo/cli"
 )
 
 var idpLdapAccesskeyInfoCmd = cli.Command{

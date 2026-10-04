@@ -31,10 +31,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/cli"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/pkg/v3/mimedb"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/minio-go/v7"
+	"github.com/lgcorzo/pkg/v3/mimedb"
 )
 
 var sqlFlags = []cli.Flag{

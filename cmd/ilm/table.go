@@ -19,7 +19,7 @@ package ilm
 
 import (
 	"github.com/jedib0t/go-pretty/v6/table"
-	"github.com/minio/minio-go/v7/pkg/lifecycle"
+	"github.com/lgcorzo/minio-go/v7/pkg/lifecycle"
 )
 
 // Table interface provides methods when implemented allows a []T to be rendered

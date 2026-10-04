@@ -20,7 +20,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 // Field configuration: color theme and max content length

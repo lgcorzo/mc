@@ -25,7 +25,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/minio/minio-go/v7"
+	"github.com/lgcorzo/minio-go/v7"
 	"github.com/shirou/gopsutil/v3/mem"
 )
 

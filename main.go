@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package main // import "github.com/minio/mc"
+package main // import "github.com/lgcorzo/mc"
 
 import (
 	"os"
 
-	mc "github.com/minio/mc/cmd"
-	"github.com/minio/pkg/v3/console"
+	mc "github.com/lgcorzo/mc/cmd"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 func main() {

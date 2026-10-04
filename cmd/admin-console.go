@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/minio/cli"
+	"github.com/lgcorzo/cli"
 )
 
 var adminConsoleFlags = []cli.Flag{

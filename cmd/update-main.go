@@ -38,11 +38,11 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/mattn/go-isatty"
-	"github.com/minio/cli"
-	json "github.com/minio/colorjson"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/pkg/v3/env"
-	"github.com/minio/selfupdate"
+	"github.com/lgcorzo/cli"
+	json "github.com/lgcorzo/colorjson"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/pkg/v3/env"
+	"github.com/lgcorzo/selfupdate"
 )
 
 // Check for new software updates.
@@ -194,7 +194,7 @@ func IsSourceBuild() bool {
 //	mc (<OS>; <ARCH>[; dcos][; kubernetes][; docker][; source]) mc/<VERSION> mc/<RELEASE-TAG> mc/<COMMIT-ID>
 //
 // Any change here should be discussed by opening an issue at
-// https://github.com/minio/mc/issues.
+// https://github.com/lgcorzo/mc/issues.
 func getUserAgent() string {
 	userAgentParts := []string{}
 	// Helper function to concisely append a pair of strings to a

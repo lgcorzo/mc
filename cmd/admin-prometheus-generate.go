@@ -22,11 +22,11 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/minio/cli"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/pkg/v3/console"
 
-	json "github.com/minio/colorjson"
+	json "github.com/lgcorzo/colorjson"
 	yaml "gopkg.in/yaml.v2"
 )
 

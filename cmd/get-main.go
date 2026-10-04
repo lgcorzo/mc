@@ -21,8 +21,8 @@ import (
 	"context"
 	"strings"
 
-	"github.com/minio/cli"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 // get command flags.

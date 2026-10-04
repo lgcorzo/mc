@@ -24,11 +24,11 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
-	"github.com/minio/cli"
-	json "github.com/minio/colorjson"
-	madmin "github.com/minio/madmin-go/v3"
-	"github.com/minio/mc/pkg/probe"
-	"github.com/minio/pkg/v3/console"
+	"github.com/lgcorzo/cli"
+	json "github.com/lgcorzo/colorjson"
+	madmin "github.com/lgcorzo/madmin-go/v3"
+	"github.com/lgcorzo/mc/pkg/probe"
+	"github.com/lgcorzo/pkg/v3/console"
 )
 
 var adminTierListCmd = cli.Command{

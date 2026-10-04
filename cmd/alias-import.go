@@ -22,8 +22,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/minio/cli"
-	"github.com/minio/mc/pkg/probe"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/mc/pkg/probe"
 )
 
 var aliasImportCmd = cli.Command{

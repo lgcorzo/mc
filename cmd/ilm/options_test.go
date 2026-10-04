@@ -22,7 +22,7 @@ import (
 	"testing"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/minio-go/v7/pkg/lifecycle"
+	"github.com/lgcorzo/minio-go/v7/pkg/lifecycle"
 )
 
 func TestOptionFilter(t *testing.T) {

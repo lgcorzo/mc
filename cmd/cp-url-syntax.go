@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/minio/cli"
+	"github.com/lgcorzo/cli"
 )
 
 func checkCopySyntax(cliCtx *cli.Context) {

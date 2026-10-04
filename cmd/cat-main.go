@@ -30,8 +30,8 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/minio/cli"
-	"github.com/minio/mc/pkg/probe"
+	"github.com/lgcorzo/cli"
+	"github.com/lgcorzo/mc/pkg/probe"
 )
 
 var catFlags = []cli.Flag{

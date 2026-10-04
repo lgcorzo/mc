@@ -24,8 +24,8 @@ import (
 	"sync"
 	"time"
 
-	json "github.com/minio/colorjson"
-	"github.com/minio/madmin-go/v3"
+	json "github.com/lgcorzo/colorjson"
+	"github.com/lgcorzo/madmin-go/v3"
 	"github.com/vbauerster/mpb/v8"
 	"github.com/vbauerster/mpb/v8/decor"
 )
