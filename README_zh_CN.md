@@ -1,5 +1,5 @@
 # MinIO客户端快速入门指南
-[![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Go Report Card](https://goreportcard.com/badge/minio/mc)](https://goreportcard.com/report/minio/mc) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/mc.svg?maxAge=604800)](https://hub.docker.com/r/minio/mc/)
+[![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Go Report Card](https://goreportcard.com/badge/lgcorzo/mc)](https://goreportcard.com/report/lgcorzo/mc) [![Docker Pulls](https://img.shields.io/docker/pulls/lgcorzo/mc.svg?maxAge=604800)](https://hub.docker.com/r/lgcorzo/mc/)
 
 MinIO Client (mc)为ls，cat，cp，mirror，diff，find等UNIX命令提供了一种替代方案。它支持文件系统和兼容Amazon S3的云存储服务（AWS Signature v2和v4）。
 
@@ -27,20 +27,20 @@ version   输出版本信息。
 ## Docker容器
 ### 稳定版
 ```
-docker pull minio/mc
-docker run minio/mc ls play
+docker pull lgcorzo/mc
+docker run lgcorzo/mc ls play
 ```
 
 ### 尝鲜版
 ```
-docker pull minio/mc:edge
-docker run minio/mc:edge ls play
+docker pull lgcorzo/mc:edge
+docker run lgcorzo/mc:edge ls play
 ```
 
 **注意:** 上述示例默认使用MinIO[演示环境](#test-your-setup)做演示，如果想用`mc`操作其它S3兼容的服务，采用下面的方式来启动容器：
 
 ```
-docker run -it --entrypoint=/bin/sh minio/mc
+docker run -it --entrypoint=/bin/sh lgcorzo/mc
 ```
 
 然后使用[`mc config`命令](#add-a-cloud-storage-service)。
@@ -58,7 +58,7 @@ mc --help
 ### 下载二进制文件
 | 平台 | CPU架构 | URL |
 | ---------- | -------- |------|
-|GNU/Linux|64-bit Intel|https://dl.min.io/client/mc/release/linux-amd64/mc |
+|GNU/Linux|64-bit Intel|https://github.com/lgcorzo/mc/releases/latest/download/mc-linux-amd64 |
 
 ```
 chmod +x mc
@@ -69,7 +69,7 @@ chmod +x mc
 ### 下载二进制文件
 | 平台 | CPU架构 | URL |
 | ---------- | -------- |------|
-|Microsoft Windows|64-bit Intel|https://dl.min.io/client/mc/release/windows-amd64/mc.exe |
+|Microsoft Windows|64-bit Intel|https://github.com/lgcorzo/mc/releases/latest/download/mc-windows-amd64.exe |
 
 ```
 mc.exe --help
@@ -81,8 +81,8 @@ mc.exe --help
 如果您没有Golang环境，请参照[如何安装Golang](https://golang.org/doc/install)。
 
 ```
-go get -d github.com/minio/mc
-cd ${GOPATH}/src/github.com/minio/mc
+go get -d github.com/lgcorzo/mc
+cd ${GOPATH}/src/github.com/lgcorzo/mc
 make
 ```
 
@@ -151,10 +151,10 @@ alias find='mc find'
 ```
 
 ### Shell自动补全
-你也可以下载[`autocomplete/bash_autocomplete`](https://raw.githubusercontent.com/minio/mc/master/autocomplete/bash_autocomplete)到`/etc/bash_completion.d/`，然后将其重命名为`mc`。别忘了在这个文件运行source命令让其在你的当前shell上可用。
+你也可以下载[`autocomplete/bash_autocomplete`](https://raw.githubusercontent.com/lgcorzo/mc/master/autocomplete/bash_autocomplete)到`/etc/bash_completion.d/`，然后将其重命名为`mc`。别忘了在这个文件运行source命令让其在你的当前shell上可用。
 
 ```
-sudo wget https://raw.githubusercontent.com/minio/mc/master/autocomplete/bash_autocomplete -O /etc/bash_completion.d/mc
+sudo wget https://raw.githubusercontent.com/lgcorzo/mc/master/autocomplete/bash_autocomplete -O /etc/bash_completion.d/mc
 source /etc/bash_completion.d/mc
 ```
 
@@ -170,4 +170,4 @@ cat      cp       events   mb       pipe     rm       share    version
 - [MinIO官方文档](https://docs.min.io/community/minio-object-store/index.html?ref=gh)
 
 ## 贡献
-请遵守MinIO[贡献者指南](https://github.com/minio/mc/blob/master/docs/zh_CN/CONTRIBUTING.md)
+请遵守MinIO[贡献者指南](https://github.com/lgcorzo/mc/blob/master/docs/zh_CN/CONTRIBUTING.md)

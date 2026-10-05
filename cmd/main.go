@@ -483,7 +483,7 @@ func registerApp(name string) *cli.App {
 		minioEnable := env.Get("MINIO_UPDATE", madmin.EnableOn)
 
 		if strings.HasPrefix(ReleaseTag, "RELEASE.") && (mcEnable == madmin.EnableOn || minioEnable == madmin.EnableOn) {
-			// Check for new updates from dl.min.io.
+			// Check for new updates.
 			checkUpdate(ctx)
 		}
 

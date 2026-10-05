@@ -57,10 +57,10 @@ jobs:
           MC_TEST_SKIP_INSECURE: true
           MC_TEST_SKIP_BUILD: true
         run: |
-          # Fetch MinIO server binary (prefer sovereign lgcorzo release with fallback)
+          # Fetch MinIO server binary (prefer sovereign lgcorzo release or compile from source)
           if ! curl -sfL "https://github.com/lgcorzo/minio/releases/latest/download/minio" -o minio; then
-            echo "Fallback to official release binary..."
-            curl -sfL "https://dl.min.io/server/minio/release/linux-amd64/minio" -o minio
+            echo "Compiling minio server from source..."
+            GOBIN=$PWD go install -v github.com/minio/minio@latest
           fi
           chmod +x minio
           mkdir -p ~/.minio/certs/ && cp testdata/localhost.crt ~/.minio/certs/public.crt && cp testdata/localhost.key ~/.minio/certs/private.key
