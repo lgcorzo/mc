@@ -37,12 +37,12 @@ import (
 	_ "crypto/sha256" // needed for selfupdate hashers
 
 	"github.com/fatih/color"
-	"github.com/mattn/go-isatty"
 	"github.com/lgcorzo/cli"
 	json "github.com/lgcorzo/colorjson"
 	"github.com/lgcorzo/mc/pkg/probe"
 	"github.com/lgcorzo/pkg/v3/env"
 	"github.com/lgcorzo/selfupdate"
+	"github.com/mattn/go-isatty"
 )
 
 // Check for new software updates.
