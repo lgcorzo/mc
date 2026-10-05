@@ -1,22 +1,33 @@
-FROM golang:1.22-alpine as build
+# Stage 1: Hermetic source build
+FROM golang:1.24-alpine AS build
 
-LABEL maintainer="MinIO Inc <dev@min.io>"
+LABEL maintainer="Luis Corzo <lgcorzo@phdata.internal>"
 
-ENV GOPATH /go
-ENV CGO_ENABLED 0
+WORKDIR /build
 
+RUN apk add --no-cache ca-certificates git make bash
 
-RUN apk add -U --no-cache ca-certificates
-RUN apk add -U curl
-RUN curl -s -q https://raw.githubusercontent.com/minio/mc/master/LICENSE -o /go/LICENSE
-RUN curl -s -q https://raw.githubusercontent.com/minio/mc/master/CREDITS -o /go/CREDITS
-RUN go install -v -ldflags "$(go run buildscripts/gen-ldflags.go)" "github.com/minio/mc@latest"
+# Cache dependencies
+COPY go.mod go.sum ./
+RUN go mod download
 
-FROM scratch
+# Copy source tree and compile
+COPY . .
 
-COPY --from=build /go/bin/mc  /usr/bin/mc
-COPY --from=build /go/CREDITS /licenses/CREDITS
-COPY --from=build /go/LICENSE /licenses/LICENSE
-COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+ARG TARGETOS TARGETARCH
+ENV CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH}
+
+RUN go build -v -trimpath -ldflags="-s -w" -o /go/bin/mc .
+
+# Stage 2: Minimal sovereign runtime image
+FROM alpine:3.20
+
+RUN apk add --no-cache ca-certificates tzdata
+
+COPY --from=build /go/bin/mc /usr/bin/mc
+COPY CREDITS /licenses/CREDITS
+COPY LICENSE /licenses/LICENSE
+
+USER 10001:10001
 
 ENTRYPOINT ["mc"]

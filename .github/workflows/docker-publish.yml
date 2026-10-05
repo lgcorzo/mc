@@ -1,0 +1,81 @@
+name: Build & Publish mc Image
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v*"
+      - "RELEASE.*"
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+  workflow_dispatch:
+    inputs:
+      custom_tag:
+        description: "Optional custom image tag (e.g. microk8s-v1)"
+        required: false
+        default: ""
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_NAME: mc
+
+jobs:
+  build-and-push:
+    name: Build & Push Container Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Determine Image Tags
+        id: meta
+        run: |
+          REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          GHCR_BASE="ghcr.io/${REPO_OWNER}/${IMAGE_NAME}"
+          TAGS="${GHCR_BASE}:latest,${GHCR_BASE}:${{ github.sha }},${GHCR_BASE}:microk8s-latest"
+
+          # Add branch or tag reference
+          REF_CLEAN=$(echo "${{ github.ref_name }}" | tr '/' '-')
+          TAGS="${TAGS},${GHCR_BASE}:${REF_CLEAN}"
+
+          # Add custom tag if triggered via workflow_dispatch
+          if [ -n "${{ github.event.inputs.custom_tag }}" ]; then
+            TAGS="${TAGS},${GHCR_BASE}:${{ github.event.inputs.custom_tag }}"
+          fi
+
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
