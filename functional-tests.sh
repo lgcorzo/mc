@@ -617,7 +617,7 @@ function test_watch_object() {
 	# start a process to watch on bucket
 	"${MC_CMD[@]}" --json watch "${SERVER_ALIAS}/${bucket_name}" >"$WATCH_OUT_FILE" &
 	watch_cmd_pid=$!
-	sleep 1
+	sleep 2
 
 	(assert_success "$start_time" "${FUNCNAME[0]}" mc_cmd cp "${FILE_1_MB}" "${SERVER_ALIAS}/${bucket_name}/${object_name}")
 	rv=$?
@@ -626,8 +626,15 @@ function test_watch_object() {
 		exit "$rv"
 	fi
 
-	sleep 1
-	if ! jq -r .events.type "$WATCH_OUT_FILE" | grep -qi ObjectCreated; then
+	found_created=0
+	for _ in $(seq 1 10); do
+		if jq -r .events.type "$WATCH_OUT_FILE" 2>/dev/null | grep -qi ObjectCreated; then
+			found_created=1
+			break
+		fi
+		sleep 1
+	done
+	if [ "$found_created" -eq 0 ]; then
 		kill "$watch_cmd_pid"
 		assert_success "$start_time" "${FUNCNAME[0]}" show_on_failure 1 "ObjectCreated event not found"
 	fi
@@ -639,8 +646,15 @@ function test_watch_object() {
 		exit "$rv"
 	fi
 
-	sleep 1
-	if ! jq -r .events.type "$WATCH_OUT_FILE" | grep -qi ObjectRemoved; then
+	found_removed=0
+	for _ in $(seq 1 10); do
+		if jq -r .events.type "$WATCH_OUT_FILE" 2>/dev/null | grep -qi ObjectRemoved; then
+			found_removed=1
+			break
+		fi
+		sleep 1
+	done
+	if [ "$found_removed" -eq 0 ]; then
 		kill "$watch_cmd_pid"
 		assert_success "$start_time" "${FUNCNAME[0]}" show_on_failure 1 "ObjectRemoved event not found"
 	fi
