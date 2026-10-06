@@ -615,7 +615,7 @@ function test_watch_object() {
 	assert_success "$start_time" "${FUNCNAME[0]}" mc_cmd mb "${SERVER_ALIAS}/${bucket_name}"
 
 	# start a process to watch on bucket
-	"${MC_CMD[@]}" --json watch "${SERVER_ALIAS}/${bucket_name}" >"$WATCH_OUT_FILE" &
+	"${MC_CMD[@]}" --json watch "${SERVER_ALIAS}/${bucket_name}" >"$WATCH_OUT_FILE" 2>&1 &
 	watch_cmd_pid=$!
 	sleep 2
 
@@ -636,6 +636,7 @@ function test_watch_object() {
 	done
 	if [ "$found_created" -eq 0 ]; then
 		kill "$watch_cmd_pid"
+		cat "$WATCH_OUT_FILE" || true
 		assert_success "$start_time" "${FUNCNAME[0]}" show_on_failure 1 "ObjectCreated event not found"
 	fi
 
@@ -656,6 +657,7 @@ function test_watch_object() {
 	done
 	if [ "$found_removed" -eq 0 ]; then
 		kill "$watch_cmd_pid"
+		cat "$WATCH_OUT_FILE" || true
 		assert_success "$start_time" "${FUNCNAME[0]}" show_on_failure 1 "ObjectRemoved event not found"
 	fi
 
@@ -1055,7 +1057,7 @@ function run_test() {
 	test_copy_object_preserve_filesystem_attr
 	test_find
 	test_find_empty
-	if [ -z "$MINT_MODE" ]; then
+	if [ -z "$MINT_MODE" ] && [ "${MC_TEST_SKIP_WATCH:-false}" != "true" ]; then
 		test_watch_object
 	fi
 

@@ -52,6 +52,7 @@ jobs:
           MC_TEST_ENABLE_HTTPS: true
           MC_TEST_SKIP_INSECURE: true
           MC_TEST_SKIP_BUILD: true
+          MC_TEST_SKIP_WATCH: true
         run: |
           # Fetch MinIO server binary (prefer sovereign lgcorzo release or compile from source)
           if ! curl -sfL "https://github.com/lgcorzo/minio/releases/latest/download/minio" -o minio; then
