@@ -20,6 +20,7 @@ jobs:
     env:
       GO111MODULE: on
     strategy:
+      fail-fast: false
       matrix:
         go-version: [1.24.x]
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -33,16 +34,11 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v4
 
-      - name: Build on ${{ matrix.os }}
-        if: matrix.os == 'windows-latest'
+      - name: Build and Test on ${{ matrix.os }}
+        if: matrix.os != 'ubuntu-latest'
+        shell: bash
         run: |
-          go build --ldflags="-s -w" -o %GOPATH%\bin\mc.exe
-          go test -v -race --timeout 30m ./...
-
-      - name: Build on ${{ matrix.os }}
-        if: matrix.os == 'macos-latest'
-        run: |
-          go build --ldflags="-s -w" -o $GOPATH/bin/mc
+          go build --ldflags="-s -w"
           go test -v -race --timeout 30m ./...
 
       - name: Build on ${{ matrix.os }}
