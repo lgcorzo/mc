@@ -73,7 +73,7 @@ func (u configSetMessage) String() (msg string) {
 		msg += console.Colorize("SetConfigSuccess",
 			fmt.Sprintf("\nPlease restart your server '%s'.", suggestion))
 	}
-	return
+	return msg
 }
 
 // JSON jsonified service status message.

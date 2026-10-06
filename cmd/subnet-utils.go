@@ -109,7 +109,7 @@ func checkURLReachable(url string) *probe.Error {
 
 func subnetURLWithAuth(reqURL, apiKey string) (string, map[string]string, error) {
 	if len(apiKey) == 0 {
-		// API key not available in minio/mc config.
+		// API key not available in lgcorzo/mc config.
 		// Ask the user to log in to get auth token
 		token, e := subnetLogin()
 		if e != nil {

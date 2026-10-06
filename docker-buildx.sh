@@ -24,10 +24,10 @@ release=$(git describe --abbrev=0 --tags)
 
 docker buildx build --push --no-cache \
 	--build-arg RELEASE="${release}" \
-	-t "minio/mc:latest" \
-	-t "minio/mc:${release}" \
-	-t "quay.io/minio/mc:${release}" \
-	-t "quay.io/minio/mc:latest" \
+	-t "ghcr.io/lgcorzo/mc:latest" \
+	-t "ghcr.io/lgcorzo/mc:${release}" \
+	-t "docker.io/lgcorzo/mc:${release}" \
+	-t "docker.io/lgcorzo/mc:latest" \
 	--platform=linux/arm64,linux/amd64,linux/ppc64le \
 	-f Dockerfile.release .
 
@@ -35,8 +35,8 @@ docker buildx prune -f
 
 docker buildx build --push --no-cache \
 	--build-arg RELEASE="${release}" \
-	-t "minio/mc:${release}-cpuv1" \
-	-t "quay.io/minio/mc:${release}-cpuv1" \
+	-t "ghcr.io/lgcorzo/mc:${release}-cpuv1" \
+	-t "docker.io/lgcorzo/mc:${release}-cpuv1" \
 	--platform=linux/arm64,linux/amd64,linux/ppc64le \
 	-f Dockerfile.release.old_cpu .
 

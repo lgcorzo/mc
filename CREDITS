@@ -4218,8 +4218,8 @@ https://github.com/matttproud/golang_protobuf_extensions
 
 ================================================================
 
-github.com/minio/cli
-https://github.com/minio/cli
+github.com/lgcorzo/cli
+https://github.com/lgcorzo/cli
 ----------------------------------------------------------------
 MIT License
 
@@ -4245,8 +4245,8 @@ SOFTWARE.
 
 ================================================================
 
-github.com/minio/crc64nvme
-https://github.com/minio/crc64nvme
+github.com/lgcorzo/crc64nvme
+https://github.com/lgcorzo/crc64nvme
 ----------------------------------------------------------------
 
                                  Apache License
@@ -4453,8 +4453,8 @@ https://github.com/minio/crc64nvme
 
 ================================================================
 
-github.com/minio/madmin-go/v3
-https://github.com/minio/madmin-go/v3
+github.com/lgcorzo/madmin-go/v3
+https://github.com/lgcorzo/madmin-go/v3
 ----------------------------------------------------------------
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
@@ -5120,8 +5120,8 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 
 ================================================================
 
-github.com/minio/md5-simd
-https://github.com/minio/md5-simd
+github.com/lgcorzo/md5-simd
+https://github.com/lgcorzo/md5-simd
 ----------------------------------------------------------------
 
                                  Apache License
@@ -5328,8 +5328,8 @@ https://github.com/minio/md5-simd
 
 ================================================================
 
-github.com/minio/minio-go/v7
-https://github.com/minio/minio-go/v7
+github.com/lgcorzo/minio-go/v7
+https://github.com/lgcorzo/minio-go/v7
 ----------------------------------------------------------------
 
                                  Apache License
@@ -5536,8 +5536,8 @@ https://github.com/minio/minio-go/v7
 
 ================================================================
 
-github.com/minio/mux
-https://github.com/minio/mux
+github.com/lgcorzo/mux
+https://github.com/lgcorzo/mux
 ----------------------------------------------------------------
 Copyright (c) 2012-2018 The Gorilla Authors. All rights reserved.
 
@@ -5569,8 +5569,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ================================================================
 
-github.com/minio/pkg/v3
-https://github.com/minio/pkg/v3
+github.com/lgcorzo/pkg/v3
+https://github.com/lgcorzo/pkg/v3
 ----------------------------------------------------------------
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
@@ -6236,8 +6236,8 @@ For more information on this, and how to apply and follow the GNU AGPL, see
 
 ================================================================
 
-github.com/minio/selfupdate
-https://github.com/minio/selfupdate
+github.com/lgcorzo/selfupdate
+https://github.com/lgcorzo/selfupdate
 ----------------------------------------------------------------
 
                                  Apache License

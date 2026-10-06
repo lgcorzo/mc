@@ -33,9 +33,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mattn/go-ieproxy"
 	"github.com/lgcorzo/madmin-go/v3"
 	"github.com/lgcorzo/minio-go/v7"
+	"github.com/mattn/go-ieproxy"
 
 	jwtgo "github.com/golang-jwt/jwt/v4"
 	"github.com/lgcorzo/mc/pkg/probe"

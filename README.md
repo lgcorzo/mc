@@ -1,5 +1,5 @@
 # MinIO Client Quickstart Guide
-[![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Go Report Card](https://goreportcard.com/badge/minio/mc)](https://goreportcard.com/report/minio/mc) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/mc.svg?maxAge=604800)](https://hub.docker.com/r/minio/mc/) [![license](https://img.shields.io/badge/license-AGPL%20V3-blue)](https://github.com/minio/mc/blob/master/LICENSE)
+[![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Go Report Card](https://goreportcard.com/badge/lgcorzo/mc)](https://goreportcard.com/report/lgcorzo/mc) [![Docker Pulls](https://img.shields.io/docker/pulls/lgcorzo/mc.svg?maxAge=604800)](https://hub.docker.com/r/lgcorzo/mc/) [![license](https://img.shields.io/badge/license-AGPL%20V3-blue)](https://github.com/lgcorzo/mc/blob/master/LICENSE)
 
 # Documentation
 - [MC documentation](https://docs.min.io/community/minio-object-store/reference/minio-mc.html)
@@ -53,20 +53,20 @@ MinIO Client (mc) provides a modern alternative to UNIX commands like ls, cat, c
 ## Docker Container
 ### Stable
 ```
-docker pull minio/mc
-docker run minio/mc ls play
+docker pull lgcorzo/mc
+docker run lgcorzo/mc ls play
 ```
 
 ### Edge
 ```
-docker pull minio/mc:edge
-docker run minio/mc:edge ls play
+docker pull lgcorzo/mc:edge
+docker run lgcorzo/mc:edge ls play
 ```
 
 **Note:** Above examples run `mc` against MinIO [_play_ environment](#test-your-setup) by default. To run `mc` against other S3 compatible servers, start the container this way:
 
 ```
-docker run -it --entrypoint=/bin/sh minio/mc
+docker run -it --entrypoint=/bin/sh lgcorzo/mc
 ```
 
 then use the [`mc alias` command](#add-a-cloud-storage-service).
@@ -77,7 +77,7 @@ When using the Docker container in GitLab CI, you must [set the entrypoint to an
 ```
 deploy:
   image:
-    name: minio/mc
+    name: lgcorzo/mc
     entrypoint: ['']
   stage: deploy
   before_script:
@@ -99,13 +99,13 @@ mc --help
 ### Binary Download
 | Platform | Architecture | URL |
 | ---------- | -------- |------|
-|GNU/Linux|64-bit Intel|https://dl.min.io/client/mc/release/linux-amd64/mc |
-|GNU/Linux|64-bit PPC|https://dl.min.io/client/mc/release/linux-ppc64le/mc |
-|GNU/Linux|64-bit ARM|https://dl.min.io/client/mc/release/linux-arm64/mc |
-|Linux/s390x|S390X|https://dl.min.io/client/mc/release/linux-s390x/mc |
+|GNU/Linux|64-bit Intel|https://github.com/lgcorzo/mc/releases/latest/download/mc-linux-amd64 |
+|GNU/Linux|64-bit PPC|https://github.com/lgcorzo/mc/releases/latest/download/mc-linux-ppc64le |
+|GNU/Linux|64-bit ARM|https://github.com/lgcorzo/mc/releases/latest/download/mc-linux-arm64 |
+|Linux/s390x|S390X|https://github.com/lgcorzo/mc/releases/latest/download/mc-linux-s390x |
 
 ```
-wget https://dl.min.io/client/mc/release/linux-amd64/mc
+wget https://github.com/lgcorzo/mc/releases/latest/download/mc-linux-amd64
 chmod +x mc
 ./mc --help
 ```
@@ -114,7 +114,7 @@ chmod +x mc
 ### Binary Download
 | Platform | Architecture | URL |
 | ---------- | -------- |------|
-|Microsoft Windows|64-bit Intel|https://dl.min.io/client/mc/release/windows-amd64/mc.exe |
+|Microsoft Windows|64-bit Intel|https://github.com/lgcorzo/mc/releases/latest/download/mc-windows-amd64.exe |
 
 ```
 mc.exe --help
@@ -124,7 +124,7 @@ mc.exe --help
 Source installation is only intended for developers and advanced users. If you do not have a working Golang environment, please follow [How to install Golang](https://golang.org/doc/install). Minimum version required is [go1.22](https://golang.org/dl/#stable)
 
 ```sh
-go install github.com/minio/mc@latest
+go install github.com/lgcorzo/mc@latest
 ```
 
 ## Add a Cloud Storage Service
@@ -246,7 +246,7 @@ cat      cp       event    head     mb       pipe     rm       share    stat    
 ```
 
 ## Contribute to MinIO Project
-Please follow MinIO [Contributor's Guide](https://github.com/minio/mc/blob/master/CONTRIBUTING.md)
+Please follow MinIO [Contributor's Guide](https://github.com/lgcorzo/mc/blob/master/CONTRIBUTING.md)
 
 ## License
-Use of `mc` is governed by the GNU AGPLv3 license that can be found in the [LICENSE](https://github.com/minio/mc/blob/master/LICENSE) file.
+Use of `mc` is governed by the GNU AGPLv3 license that can be found in the [LICENSE](https://github.com/lgcorzo/mc/blob/master/LICENSE) file.

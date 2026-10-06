@@ -4,11 +4,13 @@ on:
   pull_request:
     branches:
       - master
+  push:
+    branches:
+      - master
 
-# This ensures that previous jobs for the PR are canceled when the PR is
-# updated.
+# This ensures that previous jobs for the PR are canceled when the PR is updated.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
@@ -18,8 +20,9 @@ jobs:
     env:
       GO111MODULE: on
     strategy:
+      fail-fast: false
       matrix:
-        go-version: [1.25.x]
+        go-version: [1.24.x]
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - name: Set up Go ${{ matrix.go-version }} on ${{ matrix.os }}
@@ -31,16 +34,13 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v4
 
-      - name: Build on ${{ matrix.os }}
-        if: matrix.os == 'windows-latest'
+      - name: Build and Test on ${{ matrix.os }}
+        if: matrix.os != 'ubuntu-latest'
+        shell: bash
         run: |
-          go build --ldflags="-s -w" -o %GOPATH%\bin\mc.exe
+          go build --ldflags="-s -w"
           go test -v -race --timeout 30m ./...
-      - name: Build on ${{ matrix.os }}
-        if: matrix.os == 'macos-latest'
-        run: |
-          go build --ldflags="-s -w" -o %GOPATH%\bin\mc
-          go test -v -race --timeout 30m ./...
+
       - name: Build on ${{ matrix.os }}
         if: matrix.os == 'ubuntu-latest'
         env:
@@ -52,8 +52,14 @@ jobs:
           MC_TEST_ENABLE_HTTPS: true
           MC_TEST_SKIP_INSECURE: true
           MC_TEST_SKIP_BUILD: true
+          MC_TEST_SKIP_WATCH: true
         run: |
-          wget https://dl.min.io/server/minio/release/linux-amd64/minio && chmod +x minio
+          # Fetch MinIO server binary (prefer sovereign lgcorzo release or compile from source)
+          if ! curl -sfL "https://github.com/lgcorzo/minio/releases/latest/download/minio" -o minio; then
+            echo "Compiling minio server from source..."
+            GOBIN=$PWD go install -v github.com/minio/minio@latest
+          fi
+          chmod +x minio
           mkdir -p ~/.minio/certs/ && cp testdata/localhost.crt ~/.minio/certs/public.crt && cp testdata/localhost.key ~/.minio/certs/private.key
           sudo cp testdata/localhost.crt /usr/local/share/ca-certificates/ && sudo update-ca-certificates
           ./minio server /tmp/test-xl/{1...4}/ & sleep 10
@@ -61,19 +67,19 @@ jobs:
           make test-race
           make verify
           ./functional-tests.sh
+
   vetchecks: # Run vet checks against one version.
     env:
       CGO_ENABLED: 0
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v5
         with:
           go-version: 1.24.x
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Test 386
         run: GOOS=linux GOARCH=386 go test -short ./...
-

@@ -37,12 +37,12 @@ import (
 	_ "crypto/sha256" // needed for selfupdate hashers
 
 	"github.com/fatih/color"
-	"github.com/mattn/go-isatty"
 	"github.com/lgcorzo/cli"
 	json "github.com/lgcorzo/colorjson"
 	"github.com/lgcorzo/mc/pkg/probe"
 	"github.com/lgcorzo/pkg/v3/env"
 	"github.com/lgcorzo/selfupdate"
+	"github.com/mattn/go-isatty"
 )
 
 // Check for new software updates.
@@ -80,10 +80,11 @@ EXAMPLES:
 const (
 	mcReleaseTagTimeLayout = "2006-01-02T15-04-05Z"
 	mcOSARCH               = runtime.GOOS + "-" + runtime.GOARCH
-	mcReleaseURL           = "https://dl.min.io/client/mc/release/" + mcOSARCH + "/"
 
 	envMinisignPubKey = "MC_UPDATE_MINISIGN_PUBKEY"
 )
+
+var mcReleaseURL = env.Get("MC_RELEASE_URL", "https://github.com/lgcorzo/mc/releases/latest/download/")
 
 // For windows our files have .exe additionally.
 var mcReleaseWindowsInfoURL = mcReleaseURL + "mc.exe.sha256sum"
@@ -316,7 +317,7 @@ func getDownloadURL(customReleaseURL, releaseTag string) (downloadURL string) {
 	// Check if we are docker environment, return docker update command
 	if IsDocker() {
 		// Construct release tag name.
-		return fmt.Sprintf("docker pull minio/mc:%s", releaseTag)
+		return fmt.Sprintf("docker pull ghcr.io/lgcorzo/mc:%s", releaseTag)
 	}
 
 	if customReleaseURL == "" {

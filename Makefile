@@ -6,7 +6,7 @@ TARGET_GOARCH ?= $(shell go env GOARCH)
 TARGET_GOOS ?= $(shell go env GOOS)
 
 VERSION ?= $(shell git describe --tags)
-TAG ?= "minio/mc:$(VERSION)"
+TAG ?= "ghcr.io/lgcorzo/mc:$(VERSION)"
 
 GOLANGCI = $(GOPATH)/bin/golangci-lint
 
@@ -30,7 +30,7 @@ docker: build
 
 vet:
 	@echo "Running $@"
-	@GO111MODULE=on go vet github.com/minio/mc/...
+	@GO111MODULE=on go vet github.com/lgcorzo/mc/...
 
 lint-fix: getdeps ## runs golangci-lint suite of linters with automatic fixes
 	@echo "Running $@ check"
@@ -68,7 +68,7 @@ hotfix-vars:
 	$(eval LDFLAGS := $(shell MC_RELEASE="RELEASE" MC_HOTFIX="hotfix.$(shell git rev-parse --short HEAD)" go run buildscripts/gen-ldflags.go $(shell git describe --tags --abbrev=0 | \
     sed 's#RELEASE\.\([0-9]\+\)-\([0-9]\+\)-\([0-9]\+\)T\([0-9]\+\)-\([0-9]\+\)-\([0-9]\+\)Z#\1-\2-\3T\4:\5:\6Z#')))
 	$(eval VERSION := $(shell git describe --tags --abbrev=0).hotfix.$(shell git rev-parse --short HEAD))
-	$(eval TAG := "minio/mc:$(VERSION)")
+	$(eval TAG := "ghcr.io/lgcorzo/mc:$(VERSION)")
 
 hotfix: hotfix-vars install ## builds mc binary with hotfix tags
 	@mv -f ./mc ./mc.$(VERSION)
@@ -76,9 +76,7 @@ hotfix: hotfix-vars install ## builds mc binary with hotfix tags
 	@sha256sum < ./mc.$(VERSION) | sed 's, -,mc.$(VERSION),g' > mc.$(VERSION).sha256sum
 
 hotfix-push: hotfix
-	@scp -q -r mc.$(VERSION)* minio@dl-0.min.io:~/releases/client/mc/hotfixes/$(TARGET_GOOS)-$(TARGET_GOARCH)/archive/
-	@scp -q -r mc.$(VERSION)* minio@dl-1.min.io:~/releases/client/mc/hotfixes/$(TARGET_GOOS)-$(TARGET_GOARCH)/archive/
-	@echo "Published new hotfix binaries at https://dl.min.io/client/mc/hotfixes/$(TARGET_GOOS)-$(TARGET_GOARCH)/archive/mc.$(VERSION)"
+	@echo "Hotfix binary prepared at ./mc.$(VERSION)"
 
 docker-hotfix-push: docker-hotfix
 	@docker push -q $(TAG) && echo "Published new container $(TAG)"

@@ -1,0 +1,58 @@
+name: Upstream Sync
+
+on:
+  schedule:
+    # Run weekly on Sunday at 02:00 UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: Sync Upstream Changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git Identity
+        run: |
+          git config user.name "Dark Gravity Bot"
+          git config user.email "darkgravity@lgcorzo.phdata.internal"
+
+      - name: Fetch Upstream
+        id: fetch-upstream
+        run: |
+          UPSTREAM_URL="https://github.com/minio/mc.git"
+          git remote add upstream "${UPSTREAM_URL}" || git remote set-url upstream "${UPSTREAM_URL}"
+          git fetch upstream --tags --force
+          git fetch upstream master:refs/remotes/upstream/master
+
+      - name: Update Upstream Tracking Branch
+        run: |
+          TARGET_BRANCH="upstream-master"
+          git checkout -B "${TARGET_BRANCH}" upstream/master
+          git push origin "${TARGET_BRANCH}" --force --tags
+
+      - name: Create or Update Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: sync/upstream-master
+          base: master
+          title: "chore(upstream): synchronize mc changes from upstream"
+          body: |
+            ## Automated Upstream Synchronization for `mc`
+            - **Source Branch:** `upstream-master`
+            - **Target:** `master`
+            - **Audit:** Inspect for any conflicts with sovereign hardening patches, local Docker builds, and Go module configurations.
+            - **Policy:** Manual Human-in-the-Loop review required before merging.
+          labels: |
+            upstream-sync
+            maintenance
