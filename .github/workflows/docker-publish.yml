@@ -56,23 +56,18 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Determine Image Tags
+      - name: Docker Metadata
         id: meta
-        run: |
-          REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          GHCR_BASE="ghcr.io/${REPO_OWNER}/${IMAGE_NAME}"
-          TAGS="${GHCR_BASE}:latest,${GHCR_BASE}:${{ github.sha }},${GHCR_BASE}:microk8s-latest"
-
-          # Add branch or tag reference
-          REF_CLEAN=$(echo "${{ github.ref_name }}" | tr '/' '-')
-          TAGS="${TAGS},${GHCR_BASE}:${REF_CLEAN}"
-
-          # Add custom tag if triggered via workflow_dispatch
-          if [ -n "${{ github.event.inputs.custom_tag }}" ]; then
-            TAGS="${TAGS},${GHCR_BASE}:${{ github.event.inputs.custom_tag }}"
-          fi
-
-          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/master' }}
+            type=raw,value=microk8s-latest,enable=${{ github.ref == 'refs/heads/master' }}
+            type=sha,prefix=
+            type=ref,event=branch
+            type=ref,event=tag
+            type=raw,value=${{ inputs.custom_tag }},enable=${{ inputs.custom_tag != '' }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
@@ -80,7 +75,8 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
