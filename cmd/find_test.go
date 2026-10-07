@@ -177,6 +177,13 @@ func TestMatchFind(t *testing.T) {
 	}
 }
 
+// Tests execFind with context
+func TestExecFind(t *testing.T) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	execFind(ctx, "echo {}", contentMessage{Key: "testfile.txt"})
+}
+
 // Tests suffix strings trimmed off correctly at maxdepth.
 func TestSuffixTrimmingAtMaxDepth(t *testing.T) {
 	testCases := []struct {
