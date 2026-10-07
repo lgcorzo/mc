@@ -139,7 +139,7 @@ func execFind(ctx context.Context, args string, fileContent contentMessage) {
 	for i, arg := range split {
 		split[i] = stringsReplace(ctx, arg, fileContent)
 	}
-	// Use CommandContext to ensure process is killed if context is cancelled or times out
+	// Use CommandContext to ensure process is killed if context is canceled or times out
 	cmd := exec.CommandContext(ctx, split[0], split[1:]...)
 	var out bytes.Buffer
 	var stderr bytes.Buffer
