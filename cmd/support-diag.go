@@ -129,7 +129,8 @@ func tarGZ(healthInfo any, version, filename string) error {
 		return e
 	}
 
-	e = os.WriteFile(filename, data, 0o666)
+	// Use 0600 permissions to prevent unauthorized local users from reading sensitive system diagnostics
+	e = os.WriteFile(filename, data, 0o600)
 	if e != nil {
 		return e
 	}
