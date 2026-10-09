@@ -16,3 +16,7 @@ mc.gz
 .DS_Store
 .vscode/
 .bin/
+
+# Graphify knowledge graph
+graphify-out/
+.graphifyignore
