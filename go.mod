@@ -1,6 +1,6 @@
 module github.com/lgcorzo/mc
 
-go 1.26.0
+go 1.25
 
 // Install tools using 'go install tool'.
 tool (
