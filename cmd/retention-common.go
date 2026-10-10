@@ -20,6 +20,7 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"math"
 	"strconv"
 	"time"
 
@@ -110,7 +111,7 @@ func (m retentionBucketMessage) JSON() string {
 }
 
 func getRetainUntilDate(validity uint64, unit minio.ValidityUnit) (string, *probe.Error) {
-	if validity == 0 {
+	if validity == 0 || validity > math.MaxInt {
 		return "", probe.NewError(fmt.Errorf("invalid validity '%v'", validity))
 	}
 	t := UTCNow()

@@ -40,7 +40,7 @@ func getConfiguredMaxPipeSize() (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	maxSize, err := strconv.ParseInt(strings.TrimSpace(string(b)), 10, 64)
+	maxSize, err := strconv.ParseInt(strings.TrimSpace(string(b)), 10, 0)
 	if err != nil {
 		return 0, fmt.Errorf("error parsing %s content: %v", pipeMaxSizeProcFile, err)
 	}
