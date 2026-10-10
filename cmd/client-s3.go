@@ -27,6 +27,7 @@ import (
 	"hash/fnv"
 	"io"
 	"maps"
+	"math"
 	"net"
 	"net/http"
 	"net/url"
@@ -2473,7 +2474,7 @@ func (c *S3Client) ShareUpload(ctx context.Context, isRecursive bool, expires ti
 func (c *S3Client) SetObjectLockConfig(ctx context.Context, mode minio.RetentionMode, validity uint64, unit minio.ValidityUnit) *probe.Error {
 	bucket, object := c.url2BucketAndObject()
 
-	if bucket == "" || object != "" {
+	if bucket == "" || object != "" || validity > math.MaxUint {
 		return errInvalidArgument().Trace(bucket, object)
 	}
 
