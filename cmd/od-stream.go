@@ -164,6 +164,11 @@ func odCopy(ctx context.Context, odURLs URLs, args argKVS, odType string) (odMes
 	// Get upload time.
 	elapsed := time.Since(pg.startTime)
 
+	skipParts := 0
+	if partSize > 0 {
+		skipParts = int(uint64(skip) / partSize)
+	}
+
 	message := odMessage{
 		Status:    "success",
 		Type:      odType,
@@ -172,7 +177,7 @@ func odCopy(ctx context.Context, odURLs URLs, args argKVS, odType string) (odMes
 		PartSize:  partSize,
 		TotalSize: total,
 		Parts:     parts,
-		Skip:      int(uint64(skip) / partSize),
+		Skip:      skipParts,
 		Elapsed:   elapsed.Milliseconds(),
 	}
 
