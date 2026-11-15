@@ -7,7 +7,7 @@ Maintained fork of [minio/mc](https://github.com/minio/mc) (archived upstream). 
 
 > [!NOTE]
 > **UPSTREAM STATUS & SOVEREIGN FORK PURPOSE:**
-> Following upstream repository archiving and licensing shifts across the MinIO ecosystem, this repository is **actively maintained and hardened** under **@lgcorzo** as an essential infrastructure component of the **[Dark Gravity Autonomous CA/CD Factory](https://github.com/lgcorzo/rust_CACD_autonomous_factory)** ([Architecture Knowledge Base](https://notebook.google.com/notebook/116d5f03-2fb0-4fa7-bd7c-1c9849920abc)). Continuous security auditing, zero-CVE verification, and hardware SIMD optimizations are independently maintained to guarantee supply-chain sovereignty and operational continuity.
+> Following upstream repository archiving and licensing shifts across the MinIO ecosystem, this repository is **actively maintained and hardened** under **@lgcorzo** as an essential infrastructure component of the **[Dark Gravity Autonomous CA/CD Factory](https://github.com/lgcorzo/rust_CACD_autonomous_factory)** ([Architecture Knowledge Base](https://notebook.google.com/notebook/116d5f03-2fb0-4fa7-bd7c-1c9849920abc)). Continuous security auditing, zero-CVE verification, and hardware SIMD optimizations are independently maintained to support supply-chain continuity and security maintenance.
 
 ---
 
@@ -17,9 +17,9 @@ Maintained fork of [minio/mc](https://github.com/minio/mc) (archived upstream). 
 In the **Dark Gravity Autonomous CA/CD Software Factory (V7.2 / V7.3)**, MinIO Client (mc) Unix-like CLI used inside Dark Gravity CI/CD pipelines and Kubernetes Jobs to manage buckets, mirror datasets, and verify S3 permissions.
 
 ### 2. Supply-Chain Sovereignty & Independent Maintenance
-- **Insulation from Upstream License Closures:** When upstream open-source projects close distributions or alter licensing terms, Dark Gravity enforces **semantic mirroring and sovereign forks** to guarantee total independence from commercial vendors.
+- **Insulation from Upstream License Closures:** When upstream open-source projects close distributions or alter licensing terms, Dark Gravity maintains **semantic mirrors and patched forks** to reduce dependency on upstream commercial distribution shifts.
 - **Autonomous Security Verification & Zero-CVE Policy:** This repository is continuously audited for CVEs and vulnerabilities, maintaining a 100% clean secret scanning posture. Regressions and upstream bugs are resolved directly within the autonomous factory ecosystem.
-- **Compliance & Provenance:** Ensures cryptographic integrity and auditable lineage in compliance with the **EU AI Act**, **SOC 2 Type II**, and **Hazitek / SPRI** regulatory frameworks.
+- **Auditability & Provenance:** Designed to facilitate auditing, cryptographic integrity, and lineage traceability.
 
 ---
 
@@ -214,14 +214,19 @@ mc alias set gcs  https://storage.googleapis.com BKIKJAA5BMMU2RHO6IBB V8f1CwQqAc
 ```
 
 ## Test Your Setup
-`mc` is pre-configured with https://play.min.io, aliased as "play". It is a hosted MinIO server for testing and development purpose.  To test Amazon S3, simply replace "play" with "s3" or the alias you used at the time of setup.
+Point `mc` to a local MinIO Docker container (`docker run -d -p 9000:9000 ghcr.io/lgcorzo/minio:latest server /data`):
+
+```sh
+mc alias set local http://127.0.0.1:9000 minioadmin minioadmin
+```
+> **Note:** `minioadmin:minioadmin` are default local development credentials—do not use them in production.
 
 *Example:*
 
-List all buckets from https://play.min.io
+List all buckets on your local instance:
 
 ```
-mc ls play
+mc ls local
 [2016-03-22 19:47:48 PDT]     0B my-bucketname/
 [2016-03-22 22:01:07 PDT]     0B mytestbucket/
 [2016-03-22 20:04:39 PDT]     0B mybucketname/
@@ -275,3 +280,10 @@ Please follow MinIO [Contributor's Guide](https://github.com/lgcorzo/mc/blob/mas
 
 ## License
 Use of `mc` is governed by the GNU AGPLv3 license that can be found in the [LICENSE](https://github.com/lgcorzo/mc/blob/master/LICENSE) file.
+
+---
+
+### Fork Maintenance & Agent Transparency
+
+- **Changes vs. Upstream:** Security dependency updates, CI/CD workflow fixes, and CodeQL remediation are tracked in the [commit history](../../commits) and [Pull Requests](../../pulls?q=is%3Apr).
+- **Agent Tagging (`[agent]`):** Commits and pull requests generated automatically by agents in the Dark Gravity pipeline are prefixed with `[agent]` to distinguish automated maintenance from manual work.
